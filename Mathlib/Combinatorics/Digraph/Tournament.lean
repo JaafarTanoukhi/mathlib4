@@ -5,6 +5,7 @@ Authors: Jaafar Tanoukhi, Rida Hamadani
 -/
 import Mathlib.Combinatorics.Digraph.Basic
 import Mathlib.Combinatorics.Digraph.Orientation
+import Mathlib.Combinatorics.Digraph.Hamiltonian
 
 /-!
 
@@ -38,5 +39,15 @@ theorem isOrientation_of_isTournament (G : Digraph V) (h : G.IsTournament) :
     by_contra hc
     rw [hc] at h
     tauto
+
+variable (V : Type*) (G : Digraph V) [DecidableEq V] [Fintype V] [Nonempty V]
+
+theorem tournament_isTraceable (hG : G.IsTournament) :
+   ∃ (a b : V), ∃ (p : G.Walk a b), p.IsHamiltonian := by
+  sorry
+
+
+
+
 
 end Digraph
