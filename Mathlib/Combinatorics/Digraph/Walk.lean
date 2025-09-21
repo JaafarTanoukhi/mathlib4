@@ -3,7 +3,7 @@ Copyright (c) 2025 Jaafar Tanoukhi. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Jaafar Tanoukhi
 -/
-import Mathlib.Combinatorics.Digraph.Basic
+import Mathlib.Combinatorics.Digraph.Maps
 
 universe u
 
@@ -22,6 +22,12 @@ namespace Walk
 def support {u v : V} : G.Walk u v → List V
   | nil => [u]
   | cons _ p => u :: p.support
+
+def map {V V' : Type*} {G : Digraph V} {G' : Digraph V'} (f : G →g G') {u v : V} (p : G.Walk u v) :
+    G'.Walk (f u) (f v) :=
+  match p with
+  | .nil        => .nil
+  | .cons h p'  => .cons (f.map_rel' h) (map f p')
 
 end Walk
 
